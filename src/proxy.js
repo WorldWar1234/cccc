@@ -28,7 +28,11 @@ async function proxy(req, res) {
         "x-forwarded-for": req.headers["x-forwarded-for"] || req.ip,
         via: "1.1 bandwidth-hero",
       },
-      maxRedirections: 4
+      timeout: 10000,
+      maxRedirects: 5,
+      strictSSL: false,
+      gzip: true,
+      jar: true
     });
     _onRequestResponse(origin, req, res);
   } catch (err) {
